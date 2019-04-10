@@ -1,0 +1,6 @@
+/Volumes/LaCie/Usuarios/franferrerrodriguez/Projects/GestorRetos/GestorRetos/bin/Debug/GestorRetos.exe
+/Volumes/LaCie/Usuarios/franferrerrodriguez/Projects/GestorRetos/GestorRetos/bin/Debug/GestorRetos.pdb
+/Volumes/LaCie/Usuarios/franferrerrodriguez/Projects/GestorRetos/GestorRetos/obj/x86/Debug/GestorRetos.csprojAssemblyReference.cache
+/Volumes/LaCie/Usuarios/franferrerrodriguez/Projects/GestorRetos/GestorRetos/obj/x86/Debug/GestorRetos.csproj.CoreCompileInputs.cache
+/Volumes/LaCie/Usuarios/franferrerrodriguez/Projects/GestorRetos/GestorRetos/obj/x86/Debug/GestorRetos.exe
+/Volumes/LaCie/Usuarios/franferrerrodriguez/Projects/GestorRetos/GestorRetos/obj/x86/Debug/GestorRetos.pdb

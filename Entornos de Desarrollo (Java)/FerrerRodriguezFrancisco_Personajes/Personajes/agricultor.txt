@@ -1,0 +1,5 @@
+[AGRICULTORES]
+Agricultor - Nombre: Pepe, edad: 34 años. Cultivo: Naranjos. Herramienta: Azada(1)
+Agricultor - Nombre: Luis, edad: 38 años. Cultivo: Almendros. Herramienta: Horca(6)
+Agricultor - Nombre: Susana, edad: 41 años. Cultivo: Tomates. Herramienta: Pala(5)
+Agricultor - Nombre: Miguel Ángel, edad: 42 años. Cultivo: Limoneros. Herramienta: Legón(8)

@@ -1,0 +1,4 @@
+[GANADEROS]
+Ganadero - Nombre: Raquel, edad: 24 años. Ganado: Ponis. Transporte: Furgoneta(3)
+Ganadero - Nombre: Antonio, edad: 27 años. Ganado: Caballos. Transporte: Todoterreno(4)
+Ganadero - Nombre: José, edad: 45 años. Ganado: Vacas lecheras. Transporte: Camión(2)
