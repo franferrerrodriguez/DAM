@@ -1,6 +1,0 @@
-/Volumes/LaCie/Usuarios/franferrerrodriguez/Projects/HundirLaFlota/HundirLaFlota/bin/Debug/HundirLaFlota.exe
-/Volumes/LaCie/Usuarios/franferrerrodriguez/Projects/HundirLaFlota/HundirLaFlota/bin/Debug/HundirLaFlota.pdb
-/Volumes/LaCie/Usuarios/franferrerrodriguez/Projects/HundirLaFlota/HundirLaFlota/obj/x86/Debug/HundirLaFlota.csprojAssemblyReference.cache
-/Volumes/LaCie/Usuarios/franferrerrodriguez/Projects/HundirLaFlota/HundirLaFlota/obj/x86/Debug/HundirLaFlota.csproj.CoreCompileInputs.cache
-/Volumes/LaCie/Usuarios/franferrerrodriguez/Projects/HundirLaFlota/HundirLaFlota/obj/x86/Debug/HundirLaFlota.exe
-/Volumes/LaCie/Usuarios/franferrerrodriguez/Projects/HundirLaFlota/HundirLaFlota/obj/x86/Debug/HundirLaFlota.pdb
