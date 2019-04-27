@@ -3,10 +3,9 @@ package main;
 import java.util.Scanner;
 
 import data.Alojamiento;
-import data.CasaRural;
+import data.Alojamiento.TipoAlojamiento;
 import data.GestionAlojamientos;
 import data.GestionAlojamientos.FiltroAlojamiento;
-import data.Hotel;
 import data.Usuario;
 
 public class Main {
@@ -17,7 +16,8 @@ public class Main {
 
 		System.out.println("¡Bienvenido al programa de reservas de alojamientos!\n");
 
-		GestionAlojamientos gestionUsuarios = new GestionAlojamientos();
+		// SEPARAR USUARIOS - USUARIOS ADMIN - USUARIOS NORMAL
+		GestionAlojamientos gestionAlojamientos = new GestionAlojamientos();
 
 		Usuario usuario;
 		do {
@@ -31,9 +31,9 @@ public class Main {
 			} while (!opcion.equals("1") && !opcion.equals("2"));
 
 			if (opcion.equals("1"))
-				usuario = gestionUsuarios.loginUsuario();
+				usuario = gestionAlojamientos.loginUsuario();
 			else
-				usuario = gestionUsuarios.registrarUsuario();
+				usuario = gestionAlojamientos.registrarUsuario();
 
 			if (usuario == null)
 				System.out.println(
@@ -43,18 +43,18 @@ public class Main {
 		System.out.println(String.format("\n¡Bienvenido %s!", usuario.getUsername()));
 
 		if (usuario.isAdmin()) {
-			mostrarMenuAdmin(gestionUsuarios);
+			mostrarMenuAdmin(gestionAlojamientos);
 		} else {
-			mostrarMenu(gestionUsuarios);
+			mostrarMenu(gestionAlojamientos);
 		}
 
-		gestionUsuarios.guardarCsv();
+		gestionAlojamientos.guardarCsv();
 
 		System.out.println("\nEl programa ha finalizado.");
 
 	}
 
-	public static void mostrarMenuAdmin(GestionAlojamientos gestionUsuarios) {
+	public static void mostrarMenuAdmin(GestionAlojamientos gestionAlojamientos) {
 
 		String opcion;
 		do {
@@ -69,53 +69,55 @@ public class Main {
 
 			switch (opcion) {
 			case "1":
-				gestionUsuarios.AñadirAlojamiento();
+				gestionAlojamientos.AñadirAlojamiento();
 				break;
 			case "2":
-				gestionUsuarios.listarAlojamientos();
+				gestionAlojamientos.listarAlojamientos();
 				break;
 			case "3":
-				gestionUsuarios.eliminarAlojamientos();
+				gestionAlojamientos.eliminarAlojamientos();
 				break;
 			}
 		} while (!opcion.equals("4"));
 
 	}
 
-	public static void mostrarMenu(GestionAlojamientos gestionUsuarios) {
+	public static void mostrarMenu(GestionAlojamientos gestionAlojamientos) {
 
 		String opcion;
 		do {
-			System.out.println("\n**** MENÃš ****");
+			System.out.println("\n**** MENÚ ****");
 			System.out.println("1. Buscar alojamientos por tipo");
-			System.out.println("2. Buscar alojamientos por precio maÌ�ximo");
+			System.out.println("2. Buscar alojamientos por precio máximo");
 			System.out.println("3. Buscar casas rurales por capacidad");
-			System.out.println("4. Buscar hoteles por categoriÌ�a");
+			System.out.println("4. Buscar hoteles por categoría");
 			System.out.println("5. Ver reservas");
 			System.out.println("6. Reservar");
 			System.out.println("7. Salir del programa");
 
-			System.out.print("\nIntroduce una opciÃ³n del menÃº: ");
+			System.out.print("\nIntroduce una opción del menú: ");
 			opcion = scan.next();
 
 			switch (opcion) {
 			case "1":
-				gestionUsuarios.buscarAlojamientos(Alojamiento.class, null);
+				gestionAlojamientos.buscarAlojamientos(null, null);
 				break;
 			case "2":
-				gestionUsuarios.buscarAlojamientos(Alojamiento.class, FiltroAlojamiento.PRECIO_MAX);
+				TipoAlojamiento tipoAlojamiento = gestionAlojamientos.pedirTipoAlojamiento();
+				gestionAlojamientos.buscarAlojamientos(tipoAlojamiento, FiltroAlojamiento.PRECIO_MAX);
 				break;
 			case "3":
-				gestionUsuarios.buscarAlojamientos(CasaRural.class, FiltroAlojamiento.CAPACIDAD);
+				gestionAlojamientos.buscarAlojamientos(Alojamiento.TipoAlojamiento.CASARURAL,
+						FiltroAlojamiento.CAPACIDAD);
 				break;
 			case "4":
-				gestionUsuarios.buscarAlojamientos(Hotel.class, FiltroAlojamiento.CATEGORIA);
+				gestionAlojamientos.buscarAlojamientos(Alojamiento.TipoAlojamiento.HOTEL, FiltroAlojamiento.CATEGORIA);
 				break;
 			case "5":
-				gestionUsuarios.verReservas();
+				gestionAlojamientos.verReservas();
 				break;
 			case "6":
-				gestionUsuarios.realizarReserva();
+				gestionAlojamientos.realizarReserva();
 				break;
 			}
 		} while (!opcion.equals("7"));

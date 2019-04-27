@@ -6,10 +6,15 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+
+import data.Alojamiento.TipoAlojamiento;
 
 public class GestionAlojamientos {
 
@@ -19,6 +24,7 @@ public class GestionAlojamientos {
 	static Scanner scan = new Scanner(System.in);
 	private List<Usuario> usuarios;
 	private List<Alojamiento> alojamientos;
+	private List<Reserva> reservas;
 	final String route_csv = "./alojamientos.csv";
 	final String delim_csv = ";";
 
@@ -28,9 +34,10 @@ public class GestionAlojamientos {
 
 	public GestionAlojamientos() {
 		usuarios = new ArrayList<Usuario>();
+		alojamientos = new ArrayList<Alojamiento>();
+		reservas = new ArrayList<Reserva>();
 		usuarios.add(new Usuario("admin", "1234", true));
 		cargarCsv();
-		System.out.println();
 	}
 
 	// Comunes
@@ -81,9 +88,26 @@ public class GestionAlojamientos {
 	public void listarAlojamientos() {
 
 		if (alojamientos.size() > 0) {
+			System.out.println("\nListado de Alojamientos:");
 			int num = 1;
-			for (Alojamiento a : alojamientos) {
-				System.out.println(num + " - " + a.toString());
+			for (Alojamiento alojamiento : alojamientos) {
+				System.out.println(num + " - " + alojamiento.toString());
+				num++;
+			}
+		} else
+			System.out.println("No existe ningún alojamiento en la lista.");
+
+	}
+
+	public void listarAlojamientos(List<Alojamiento> alojamientos_param) {
+
+		if (alojamientos_param.size() > 0) {
+			System.out.println("\nListado de Alojamientos:");
+			int num = 1;
+			for (Alojamiento alojamiento : alojamientos) {
+				for (Alojamiento alojamiento_param : alojamientos_param)
+					if (alojamiento.equals(alojamiento_param))
+						System.out.println(num + " - " + alojamiento_param.toString());
 				num++;
 			}
 		} else
@@ -115,7 +139,7 @@ public class GestionAlojamientos {
 
 	public void cargarCsv() {
 
-		alojamientos = new ArrayList<Alojamiento>();
+		alojamientos.clear();
 
 		try {
 			br = new BufferedReader(new FileReader(route_csv));
@@ -149,20 +173,29 @@ public class GestionAlojamientos {
 		return alojamiento;
 	}
 
-	// Usuarios Administradores
-	public void AñadirAlojamiento() {
+	public TipoAlojamiento pedirTipoAlojamiento() {
+		String text;
+		TipoAlojamiento tipoAlojamiento = null;
 
-		Boolean valido = false;
-		String opcion;
 		do {
-			System.out.println("\nSelecciona una opción para el alta del alojamiento:");
+			System.out.println("\nSelecciona tipo de alojamiento:");
 			System.out.println("1. Hotel");
 			System.out.println("2. Casa Rural");
 
-			opcion = scan.next();
-			if (opcion.equals("1") || opcion.equals("2"))
-				valido = true;
-		} while (!valido);
+			text = scan.next();
+			if (text.equals("1"))
+				tipoAlojamiento = Alojamiento.TipoAlojamiento.HOTEL;
+			else if (text.equals("2"))
+				tipoAlojamiento = Alojamiento.TipoAlojamiento.CASARURAL;
+		} while (tipoAlojamiento == null);
+
+		return tipoAlojamiento;
+	}
+
+	// Usuarios Administradores
+	public void AñadirAlojamiento() {
+
+		TipoAlojamiento tipoAlojamiento = pedirTipoAlojamiento();
 
 		System.out.print("Introduzca el nombre del alojamiento: ");
 		String nombre = scan.next();
@@ -179,7 +212,7 @@ public class GestionAlojamientos {
 		Boolean tienePiscina = false;
 		int max_personas = 0;
 		int num_habitaciones = 0;
-		if (opcion.equals("1")) {
+		if (tipoAlojamiento.equals(TipoAlojamiento.HOTEL)) {
 			System.out.print("Introduzca el número de estrellas (1-5): ");
 			try {
 				num_estrellas = scan.nextInt();
@@ -189,7 +222,7 @@ public class GestionAlojamientos {
 
 			System.out.print("¿Tiene piscina? (SI / NO): ");
 			tienePiscina = scan.next().equalsIgnoreCase("si") ? true : false;
-		} else {
+		} else if (tipoAlojamiento.equals(TipoAlojamiento.CASARURAL)) {
 			System.out.print("Introduzca el máximo de personas: ");
 			try {
 				max_personas = scan.nextInt();
@@ -206,9 +239,9 @@ public class GestionAlojamientos {
 		}
 
 		if (Alojamiento.comprobarNombre(nombre)) {
-			if (opcion.equals("1"))
+			if (tipoAlojamiento.equals(TipoAlojamiento.HOTEL))
 				alojamientos.add(new Hotel(nombre, precio, num_estrellas, tienePiscina));
-			else
+			else if (tipoAlojamiento.equals(TipoAlojamiento.CASARURAL))
 				alojamientos.add(new CasaRural(nombre, precio, max_personas, num_habitaciones));
 			System.out.println(String.format("El alojamiento (%s) ha sido registrado correctamente.", nombre));
 		} else
@@ -235,32 +268,134 @@ public class GestionAlojamientos {
 	}
 
 	// Usuarios Normales
-	public <T> void buscarAlojamientos(Class<T> type, FiltroAlojamiento filtro) {
+	public void buscarAlojamientos(TipoAlojamiento buscarTipo, FiltroAlojamiento filtro) {
 
-		if (type.equals(Alojamiento.class)) {
+		List<Alojamiento> alojamientos_tmp = alojamientos;
+
+		if (buscarTipo != null)
+			alojamientos_tmp = alojamientos.stream().filter(x -> buscarTipo.equals(x.getTipo()))
+					.collect(Collectors.toList());
+
+		Boolean valido = false;
+		if (filtro != null) {
 			switch (filtro) {
 			case PRECIO_MAX:
-				//
+				double precio_max = 0;
+				do {
+					System.out.println("\nIntroduce el importe máximo de alojamientos a mostrar:");
+					try {
+						precio_max = Double.parseDouble(scan.next());
+						valido = true;
+					} catch (NumberFormatException e) {
+						System.out.println("Error, debe introducir un número para el importe máximo.");
+					}
+				} while (!valido);
+				double pre = precio_max;
+				alojamientos_tmp = alojamientos_tmp.stream().filter(x -> (x.getPrecio() <= pre))
+						.collect(Collectors.toList());
 				break;
-			default:
-				//
+			case CAPACIDAD:
+				int capacidad = 0;
+				do {
+					System.out.println("\nIntroduce el máximo de personas de alojamientos mostrar:");
+					try {
+						capacidad = Integer.parseInt(scan.next());
+						valido = true;
+					} catch (NumberFormatException e) {
+						System.out.println("Error, debe introducir un número para el máximo de personas.");
+					}
+				} while (!valido);
+				int cap = capacidad;
+				alojamientos_tmp = alojamientos_tmp.stream().filter(x -> (cap >= x.getMaxPersonas()))
+						.collect(Collectors.toList());
+				break;
+			case CATEGORIA:
+				int categoria = 0;
+				do {
+					System.out.println("\nIntroduce el número de estrellas máximo de alojamientos a mostrar:");
+					try {
+						categoria = Integer.parseInt(scan.next());
+						valido = true;
+					} catch (NumberFormatException e) {
+						System.out.println("Error, debe introducir un número para el número de estrellas.");
+					}
+				} while (!valido);
+				int cat = categoria;
+				alojamientos_tmp = alojamientos_tmp.stream().filter(x -> (cat >= x.getNumEstrellas()))
+						.collect(Collectors.toList());
 				break;
 			}
-		} else if (type.equals(Hotel.class)) {
-
-		} else if (type.equals(CasaRural.class)) {
-
 		}
 
-		listarAlojamientos();
+		listarAlojamientos(alojamientos_tmp);
 	}
 
 	public void verReservas() {
-
+		if (reservas.size() > 0) {
+			System.out.println("\nListado de reservas:");
+			for (Reserva reserva : reservas)
+				System.out.println(reserva.toString());
+		} else
+			System.out.println("No existe ninguna reserva en la lista.");
 	}
 
 	public void realizarReserva() {
 
+		Alojamiento alojamiento = null;
+		Boolean valido = false;
+		int posicion_reserva = 0;
+		do {
+			System.out.println("\nIntroduce el número de la posición del alojamiento a reservar:");
+			try {
+				posicion_reserva = Integer.parseInt(scan.next()) - 1;
+				alojamiento = alojamientos.get(posicion_reserva);
+				if (!alojamiento.getReservado()) {
+					alojamiento.setReservado(true);
+					valido = true;
+				} else
+					System.out.println("Error, el alojamiento seleccionado ya se encuentra reservado.");
+			} catch (NumberFormatException e) {
+				System.out.println("Error, debe introducir un número de posición del alojamiento a reservar.");
+			} catch (IndexOutOfBoundsException e) {
+				System.out.println("Error, la posición introducida no existe en la lista de alojamientos.");
+			}
+		} while (!valido);
+
+		valido = false;
+		String fecha_entrada = "";
+		do {
+			System.out.println("\nIntroduce fecha de entrada al alojamiento (dd-mm-aaaa):");
+			fecha_entrada = scan.next();
+			if (validaFecha(fecha_entrada))
+				valido = true;
+		} while (!valido);
+
+		valido = false;
+		int num_dias = 0;
+		do {
+			System.out.println("\nIntroduce el número de días a reservar:");
+			try {
+				num_dias = Integer.parseInt(scan.next());
+				valido = true;
+			} catch (NumberFormatException e) {
+				System.out.println("Error, debe introducir un número de días a reservar.");
+			}
+		} while (!valido);
+
+		reservas.add(new Reserva(fecha_entrada, num_dias, alojamiento));
+	}
+
+	public static boolean validaFecha(String date) {
+		Boolean valid = true;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		dateFormat.setLenient(false);
+		try {
+			dateFormat.parse(date.trim());
+		} catch (ParseException pe) {
+			valid = false;
+			System.out.println("Formato de fecha no válido. El formato debe ser (dd-mm-aaaa).");
+		}
+		return valid;
 	}
 
 }

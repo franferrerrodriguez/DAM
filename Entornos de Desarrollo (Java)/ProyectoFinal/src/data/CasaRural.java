@@ -9,8 +9,10 @@ public class CasaRural extends Alojamiento {
 		super(nombre, precio);
 		this.max_personas = max_personas;
 		this.num_habitaciones = num_habitaciones;
+		super.tipo = TipoAlojamiento.CASARURAL;
 	}
 
+	@Override
 	public int getMaxPersonas() {
 		return max_personas;
 	}
@@ -29,7 +31,7 @@ public class CasaRural extends Alojamiento {
 
 	@Override
 	public String toString() {
-		return "Casa Rural: " + super.getNombre() + " - Precio: " + super.getPrecio() + " - MÃ¡ximo personas: "
+		return "Casa Rural: " + super.getNombre() + " - Precio: " + super.getPrecio() + " - Máximo personas: "
 				+ max_personas + " - Nº Habitaciones: " + num_habitaciones;
 	}
 

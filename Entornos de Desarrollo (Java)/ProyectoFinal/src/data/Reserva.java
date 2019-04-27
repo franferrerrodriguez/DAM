@@ -1,22 +1,22 @@
 package data;
 
-import java.util.Date;
-
 public class Reserva {
 
-	private Date fecha_entrada;
+	private String fecha_entrada;
 	private int num_dias;
+	private Alojamiento alojamiento;
 
-	public Reserva(Date fecha_entrada, int num_dias) {
+	public Reserva(String fecha_entrada, int num_dias, Alojamiento alojamiento) {
 		this.fecha_entrada = fecha_entrada;
 		this.num_dias = num_dias;
+		this.alojamiento = alojamiento;
 	}
 
-	public Date getFechaEntrada() {
+	public String getFechaEntrada() {
 		return fecha_entrada;
 	}
 
-	public void setFechaEntrada(Date fecha_entrada) {
+	public void setFechaEntrada(String fecha_entrada) {
 		this.fecha_entrada = fecha_entrada;
 	}
 
@@ -26,6 +26,20 @@ public class Reserva {
 
 	public void setNumDias(int num_dias) {
 		this.num_dias = num_dias;
+	}
+
+	public Alojamiento getAlojamiento() {
+		return alojamiento;
+	}
+
+	public void setAlojamiento(Alojamiento alojamiento) {
+		this.alojamiento = alojamiento;
+	}
+
+	@Override
+	public String toString() {
+		return "Reserva - Nombre alojamiento:  " + alojamiento.getNombre() + " - Fecha de entrada: " + fecha_entrada
+				+ " - Número de días: " + num_dias;
 	}
 
 }

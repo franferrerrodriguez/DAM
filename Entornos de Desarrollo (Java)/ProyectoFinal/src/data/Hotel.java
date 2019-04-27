@@ -9,8 +9,10 @@ public class Hotel extends Alojamiento {
 		super(nombre, precio);
 		setNumEstrellas(num_estrellas);
 		this.tiene_piscina = tiene_piscina;
+		super.tipo = TipoAlojamiento.HOTEL;
 	}
 
+	@Override
 	public int getNumEstrellas() {
 		return num_estrellas;
 	}
