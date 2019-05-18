@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="main.AlojamientosController">
+  <children>
+    <Label fx:id="label" layoutX="66.0" layoutY="109.0" minHeight="16.0" minWidth="69.0" />
+    <ListView fx:id="lista" layoutX="0.0" layoutY="0.0" onMouseClicked="#changeAlojamientoListView" prefHeight="600.0" prefWidth="350.0" />
+    <RadioButton fx:id="radio_hotel" layoutX="507.0" layoutY="36.0" mnemonicParsing="false" onAction="#cambioAlojamiento" selected="true" text="Hotel">
+      <toggleGroup>
+        <ToggleGroup fx:id="alojamientos" />
+      </toggleGroup>
+    </RadioButton>
+    <RadioButton id="radio_hotel" fx:id="radio_casarural" layoutX="638.0" layoutY="36.0" mnemonicParsing="false" onAction="#cambioAlojamiento" text="Casa Rural" toggleGroup="$alojamientos" />
+    <Label layoutX="369.0" layoutY="97.0" text="Nombre Alojamiento:" />
+    <Label layoutX="369.0" layoutY="192.0" text="Precio por noche:" />
+    <Label layoutX="369.0" layoutY="296.0" text="Estrellas:" />
+    <Label layoutX="689.0" layoutY="296.0" text="Max. Personas:" />
+    <TextField fx:id="txt_nombrealojamiento" layoutX="369.0" layoutY="130.0" prefHeight="40.0" prefWidth="600.0" />
+    <TextField fx:id="txt_precionoche" cache="false" disable="false" layoutX="369.0" layoutY="224.0" mouseTransparent="false" onDragDone="#checkPrecioNoche" onKeyPressed="#checkPrecioNoche" onKeyReleased="#checkPrecioNoche" pickOnBounds="false" prefHeight="40.0" prefWidth="600.0" />
+    <TextField fx:id="txt_numestrellas" layoutX="369.0" layoutY="327.0" onDragDone="#checkNumEstrellas" onKeyPressed="#checkNumEstrellas" onKeyReleased="#checkNumEstrellas" prefHeight="40.0" prefWidth="280.0" />
+    <TextField fx:id="txt_max_personas" layoutX="689.0" layoutY="327.0" onDragDone="#checkMaxPersonas" onKeyPressed="#checkMaxPersonas" onKeyReleased="#checkMaxPersonas" prefHeight="40.0" prefWidth="280.0" />
+    <TextField fx:id="txt_numhabitaciones" layoutX="689.0" layoutY="429.0" onDragDone="#checkNumHabitaciones" onKeyPressed="#checkNumHabitaciones" onKeyReleased="#checkNumHabitaciones" prefHeight="40.0" prefWidth="280.0" />
+    <CheckBox fx:id="check_piscina" layoutX="369.0" layoutY="384.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="118.0" text="Piscina" />
+    <Button fx:id="btn_anadir" layoutY="521.0" mnemonicParsing="false" onAction="#btnAnadir" prefHeight="40.0" prefWidth="160.0" text="Añadir" AnchorPane.leftAnchor="369.0" />
+    <Button fx:id="btn_borrar" layoutY="521.0" mnemonicParsing="false" onAction="#btnBorrar" prefHeight="40.0" prefWidth="160.0" text="Borrar" AnchorPane.leftAnchor="590.0" />
+    <Button fx:id="btn_limpiar" layoutY="521.0" mnemonicParsing="false" onAction="#btnLimpiarCampos" prefHeight="40.0" prefWidth="160.0" text="Limpiar campos" AnchorPane.leftAnchor="809.0" />
+    <Label layoutX="689.0" layoutY="400.0" text="Habitaciones" />
+  </children>
+</AnchorPane>
