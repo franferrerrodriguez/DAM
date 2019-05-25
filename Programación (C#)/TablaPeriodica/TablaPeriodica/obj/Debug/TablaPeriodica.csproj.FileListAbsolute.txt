@@ -1,0 +1,7 @@
+C:\Users\Francisco J. Ferrer\source\repos\TablaPeriodica\TablaPeriodica\bin\Debug\TablaPeriodica.exe.config
+C:\Users\Francisco J. Ferrer\source\repos\TablaPeriodica\TablaPeriodica\bin\Debug\TablaPeriodica.exe
+C:\Users\Francisco J. Ferrer\source\repos\TablaPeriodica\TablaPeriodica\bin\Debug\TablaPeriodica.pdb
+C:\Users\Francisco J. Ferrer\source\repos\TablaPeriodica\TablaPeriodica\obj\Debug\TablaPeriodica.csprojAssemblyReference.cache
+C:\Users\Francisco J. Ferrer\source\repos\TablaPeriodica\TablaPeriodica\obj\Debug\TablaPeriodica.csproj.CoreCompileInputs.cache
+C:\Users\Francisco J. Ferrer\source\repos\TablaPeriodica\TablaPeriodica\obj\Debug\TablaPeriodica.exe
+C:\Users\Francisco J. Ferrer\source\repos\TablaPeriodica\TablaPeriodica\obj\Debug\TablaPeriodica.pdb

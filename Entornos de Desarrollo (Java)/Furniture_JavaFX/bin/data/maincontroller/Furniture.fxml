@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="180.0" prefWidth="380.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="data.maincontroller.FurnitureController">
+  <children>
+    <Label fx:id="label" layoutX="66.0" layoutY="109.0" minHeight="16.0" minWidth="69.0" />
+    <Label layoutX="82.0" layoutY="24.0" prefWidth="217.0" text="FURNITURE MAIN MENU">
+      <font>
+        <Font name="System Bold" size="18.0" />
+      </font>
+    </Label>
+    <Button fx:id="btn_listarAlmacenA" layoutX="101.0" layoutY="74.0" mnemonicParsing="false" onAction="#btnListarAlmacenA" prefWidth="179.0" text="Listado almacén A" />
+    <Button fx:id="btn_exit" layoutX="161.0" layoutY="121.0" mnemonicParsing="false" onAction="#btnExit" text="Exit" />
+  </children>
+</AnchorPane>

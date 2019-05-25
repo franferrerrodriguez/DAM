@@ -1,0 +1,8 @@
+﻿Metal;Mercurio;Hg;80;A.C.;liquido;rojo;no noble
+Metal;Oro;Au;79;A.C.;no;amarillo;noble
+Metaloide;Cobalto;Co;27;1731;no;no noble
+Metaloide;Rutenio;Ru;44;1808;no;noble
+NoMetal;Helio;He;2;1896;gas noble
+NoMetal;Hidrógeno;H;1;1767;no noble
+Metal;1;2;3;A.C.;liquido;rojo;no noble
+Metal;1;1;1;2019;liquido;si;noble

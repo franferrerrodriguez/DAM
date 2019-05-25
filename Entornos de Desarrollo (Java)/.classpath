@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Alojamientos_JavaFX/src"/>
+	<classpathentry kind="src" path="FerrerRodriguezFrancisco_Blog/Blog/src"/>
+	<classpathentry kind="src" path="FerrerRodriguezFrancisco_Estados/Estados/src"/>
+	<classpathentry kind="src" path="FerrerRodriguezFrancisco_Personajes/Personajes/src"/>
+	<classpathentry kind="src" path="FerrerRodriguezFrancisco_VideoJuegos/VideoJuegos/src"/>
+	<classpathentry kind="src" path="ProyectoFinal/src"/>
+	<classpathentry kind="output" path="Alojamientos_JavaFX/bin"/>
+</classpath>

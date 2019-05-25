@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="main.AlojamientosController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="main.FurnitureController">
   <children>
     <Label fx:id="label" layoutX="66.0" layoutY="109.0" minHeight="16.0" minWidth="69.0" />
     <ListView fx:id="lista" layoutX="0.0" layoutY="0.0" onMouseClicked="#changeAlojamientoListView" prefHeight="600.0" prefWidth="350.0" />
